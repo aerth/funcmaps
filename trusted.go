@@ -12,6 +12,7 @@ package funcmaps
 import (
 	"html/template"
 
+	"github.com/kr/pretty"
 	"github.com/spf13/cast"
 )
 
@@ -22,12 +23,24 @@ import (
 // output
 func Trusted() FuncMap {
 	return FuncMap{
-		"safeCSS":      CSS,
-		"safeHTML":     HTML,
-		"safeHTMLAttr": HTMLAttr,
-		"safeJS":       JS,
-		"safeURL":      URL,
+		"unsafeCSS":      CSS,
+		"unsafeHTML":     HTML,
+		"unsafeHTMLAttr": HTMLAttr,
+		"unsafeJS":       JS,
+		"unsafeURL":      URL,
 	}
+}
+
+func Debug() FuncMap {
+	return FuncMap{
+		"unsafedebug":  pretty.Sprint,
+		"unsafedebugf": pretty.Sprintf,
+	}
+}
+
+// All (Default, Trusted, Debug)
+func All() FuncMap {
+	return Combined(Default(), Trusted(), Debug())
 }
 
 // CSS returns a given string as html/template CSS content

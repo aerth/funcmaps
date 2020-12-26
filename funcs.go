@@ -107,8 +107,3 @@ func Combined(fs ...FuncMap) FuncMap {
 	}
 	return m
 }
-
-// GeneralFuncMap return general func map.
-func GeneralFuncMap() map[string]interface{} {
-	return map[string]interface{}{}
-}
